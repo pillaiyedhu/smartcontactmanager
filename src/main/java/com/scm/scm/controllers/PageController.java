@@ -12,6 +12,18 @@ public class PageController {
         model.addAttribute("name", "Smart Contact Manager");
         return "home";
     }
+
+    @RequestMapping("/about")
+    public String about(Model model){
+        return "about";
+    }
+
+    @RequestMapping("/services")
+    public String services(){
+        return "services";
+    }
+
+
 }
 
 
