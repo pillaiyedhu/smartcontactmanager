@@ -12,6 +12,13 @@
 
     <!-- login signup button and also hambuger when made responsive -->
     <div class="flex gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        
+        <!-- theme button -->
+        <button id="theme_button" class="flex gap-1 text-white bg-gray-400 px-4 py-2 rounded text-center dark:bg-gray-600 " >
+            <img src="assets/night-mode.png" class="h-6"/>
+            <span> Light </span>
+        </button>
+
         <a data-th-href="@{'/login'}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Login
         </a>
