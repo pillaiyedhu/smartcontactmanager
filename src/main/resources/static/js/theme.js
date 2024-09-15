@@ -1,6 +1,9 @@
 let currentTheme = getTheme();
 
-changeTheme();
+document.addEventListener("DOMContentLoaded",() => {  
+    changeTheme();
+});
+
 
 function changeTheme(){
     changePageTheme(currentTheme,"");
