@@ -9,6 +9,8 @@ import com.scm.scm.constant.Provider;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -48,6 +50,7 @@ public class User {
     private Boolean emailVerified = false;
     private Boolean phoneVerified = false;
 
+    @Enumerated(EnumType.STRING)
     private Provider provider = Provider.SELF;
     private String providerUserId;
 
