@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.scm.scm.constant.MessageType;
 import com.scm.scm.entity.User;
 import com.scm.scm.forms.UserForm;
+import com.scm.scm.helpers.Message;
 import com.scm.scm.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -53,7 +57,7 @@ public class PageController {
     }
 
     @RequestMapping(value = "/do-register", method=RequestMethod.POST)
-    public String userRegistration(@ModelAttribute UserForm userForm) {
+    public String userRegistration(@ModelAttribute UserForm userForm, HttpSession httpSession) {
         System.out.println("User Registration Begin......");
         //System.out.println(userForm);
         User user = new User();
@@ -65,6 +69,10 @@ public class PageController {
         user.setProfilePic("/media/dell/New Volume/Yedhu/Projects/scm/src/main/resources/static/assets/default-profile.png");
 
         userService.saveUser(user);
+
+        Message message = Message.builder().content("User Registered Successfully").type(MessageType.green).build();
+        httpSession.setAttribute("message", message);
+
         return "redirect:/register";
     }
     
