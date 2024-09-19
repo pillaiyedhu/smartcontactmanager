@@ -3,10 +3,10 @@ package com.scm.scm.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.scm.scm.constant.MessageType;
 import com.scm.scm.entity.User;
@@ -15,6 +15,7 @@ import com.scm.scm.helpers.Message;
 import com.scm.scm.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -52,13 +53,17 @@ public class PageController {
     @RequestMapping("/register")
     public String register(Model model){
         UserForm userForm = new UserForm();
-        model.addAttribute("userform", userForm);
+        model.addAttribute("userForm", userForm);
         return "register";
     }
 
     @RequestMapping(value = "/do-register", method=RequestMethod.POST)
-    public String userRegistration(@ModelAttribute UserForm userForm, HttpSession httpSession) {
+    public String userRegistration(@Valid @ModelAttribute("userForm") UserForm userForm, BindingResult bindingResult, HttpSession httpSession) {
         System.out.println("User Registration Begin......");
+        if(bindingResult.hasErrors()){
+            System.out.println("binding result have error");
+            return "register";
+        }
         //System.out.println(userForm);
         User user = new User();
         user.setName(userForm.getName());
